@@ -215,7 +215,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="home-main.html#0" class="butn butn-md radius-10 mt-30">
+                            <a href="home-main.html#0" class="butn butn-md radius-10 mt-30" id="downloadButton>
                                 <span>Dowonload C.V</span>
                             </a>
                         </div>
@@ -1026,6 +1026,48 @@
 
     <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+    <script>
+        /**
+         * Function to download a file from a portfolio
+         * @param {string} fileUrl - The URL of the file to download
+         * @param {string} [fileName] - Optional name to save the file as
+         */
+        function downloadFile(fileUrl, fileName) {
+            try {
+                // Ensure the file URL is provided
+                if (!fileUrl) {
+                    throw new Error('File URL is missing. Unable to download the file.');
+                }
+
+                // Create an anchor element to trigger the download
+                const anchor = document.createElement('a');
+                anchor.href = fileUrl;
+                anchor.download = fileName || 'downloaded_file';  // Fallback to default name if none provided
+
+                // Append the anchor to the body (necessary for Firefox)
+                document.body.appendChild(anchor);
+                
+                // Trigger the download by simulating a click event
+                anchor.click();
+
+                // Clean up by removing the anchor from the document
+                document.body.removeChild(anchor);
+
+                console.log(`Download initiated: ${fileName || 'File'}`);
+            } catch (error) {
+                console.error('Error during file download:', error.message);
+                alert('An error occurred while attempting to download the file. Please try again.');
+            }
+        }
+
+        // Set up the button's click event to trigger the download function
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            const fileUrl = '/files/portfolio.pdf';  // Path to the file (replace with actual file path)
+            const fileName = 'Portfolio.pdf';  // Optional custom file name
+            downloadFile(fileUrl, fileName);
+        });
+    </script>
+                        
     <!-- jQuery -->
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/jquery-migrate-3.4.0.min.js"></script>
