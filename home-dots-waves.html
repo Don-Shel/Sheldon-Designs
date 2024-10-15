@@ -217,8 +217,8 @@
                             </div>
                         </div>
                         <div>
-                            <a href="home-main.html#0" class="butn butn-md radius-10 mt-30" id="downloadButton">
-                                <span>Dwonload C.V</span>
+                            <a class="butn butn-md radius-10 mt-30" onclick="downloadFile()">
+                                <span>Download C.V</span>
                             </a>
                         </div>
                     </div>
@@ -1028,45 +1028,20 @@
     <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script>
-        /**
-         * Function to download a file from a portfolio
-         * @param {string} fileUrl - The URL of the file to download
-         * @param {string} [fileName] - Optional name to save the file as
-         */
-        function downloadFile(fileUrl, fileName) {
-            try {
-                // Ensure the file URL is provided
-                if (!fileUrl) {
-                    throw new Error('File URL is missing. Unable to download the file.');
-                }
+    function downloadFile() {
+        // URL of the file you want to download
+        const fileUrl = '../SHELDON CURRICULUM VITAE.pdf';
 
-                // Create an anchor element to trigger the download
-                const anchor = document.createElement('a');
-                anchor.href = fileUrl;
-                anchor.download = fileName || 'downloaded_file';  // Fallback to default name if none provided
+        // Create an anchor element dynamically
+        const a = document.createElement('a');
+        a.href = fileUrl;
+        a.download = 'SHELDON CURRICULUM VITAE.pdf'; // Name of the file after download
 
-                // Append the anchor to the body (necessary for Firefox)
-                document.body.appendChild(anchor);
-                
-                // Trigger the download by simulating a click event
-                anchor.click();
-
-                // Clean up by removing the anchor from the document
-                document.body.removeChild(anchor);
-
-                console.log(`Download initiated: ${fileName || 'File'}`);
-            } catch (error) {
-                console.error('Error during file download:', error.message);
-                alert('An error occurred while attempting to download the file. Please try again.');
-            }
-        }
-
-        // Set up the button's click event to trigger the download function
-        document.getElementById('downloadButton').addEventListener('click', function() {
-            const fileUrl = '/files/portfolio.pdf';  // Path to the file (replace with actual file path)
-            const fileName = 'Portfolio.pdf';  // Optional custom file name
-            downloadFile(fileUrl, fileName);
-        });
+        // Append anchor to the body, trigger the download, and remove it after download
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
     </script>
     
     <!-- jQuery -->
